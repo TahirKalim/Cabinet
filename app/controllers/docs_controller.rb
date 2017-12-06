@@ -10,11 +10,11 @@ class DocsController < ApplicationController
 	end
 
 	def new
-		@doc = Doc.new
+		@doc = current_user.docs.build
 	end
 
 	def create
-		@doc = Doc.new(doc_params)
+		@doc = current_user.docs.build(doc_params)
 
 		if @doc.save
 			redirect_to @doc
@@ -36,7 +36,7 @@ class DocsController < ApplicationController
 
 	def destroy	 
 		@doc.destroy
-		redirect_to doc_path
+		redirect_to docs_path
 	end
 
 private
